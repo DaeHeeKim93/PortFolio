@@ -78,8 +78,8 @@
                     <hr/>
                     <%--내용 처리 --%>
                     <div class="row" id = "board_container">
-                        <div class="col-xs-1"></div>
-                        <div class="col-xs-11">
+                        <div class="col-md-12">
+                            <meta charset="utf-8">
                                 ${BoardVO.content}
                         </div>
 
@@ -147,7 +147,7 @@
                 </div>
 
                 <!-- Blog Sidebar Widgets Column -->
-                <div class="col-md-4">
+                <div class="col-md-4" id="sidebar_Div">
 
                     <!-- Blog Search Well -->
                     <div class="well">
@@ -194,13 +194,13 @@
             <!-- Footer -->
             <footer>
                 <div class="row">
-                    <div class="col-lg-2">
+                    <div name= "tag_Div1" class="col-lg-2 col-xs-0">
                         <p>Copyright &copy; My Side 2017</p>
                     </div>
-                    <div class="col-lg-3">
+                    <div name= "tag_Div2" class="col-lg-3 col-xs-0">
 
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-xs-12">
 
                         <form name="update_form" id="update_form" method="post" action="/update">
                             <input type="hidden" id="board_collect" name="board_collect"
@@ -210,7 +210,7 @@
                             <input type="submit" class="btn btn-warning" value="게시글 수정"></input>
                         </form>
                     </div>
-                    <div class="col-lg-4">
+                    <div name= "tag_Div3" class="col-lg-4 col-xs-0">
 
                 </div>
                 </div>

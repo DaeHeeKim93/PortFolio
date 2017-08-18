@@ -21,7 +21,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" style="overflow:scroll;">
             <div class="starter-template">
                     <%--로고 삽입 부분--%>
                     <div class="table_first">
@@ -30,8 +30,6 @@
                     <div class="row" name="paging" id="paging">
                         <div class="col-md-1"></div>
                         <div class="col-md-7">
-
-
                             <table class="table-fill">
                                 <thead>
                                     <tr>
@@ -64,7 +62,7 @@
                         </div>
 
                         <div class="col-md-1"></div>
-                        <div class="col-md-3">
+                        <div id = "nickname_Div"  class="col-md-3">
                             <div class="row"></div>
                             <%--로그인 정보 확인--%>
                             <div class="row">
@@ -82,32 +80,25 @@
                         </div>
                     </div>
 
-
                         <%--검색 기능 페이지--%>
                     <div class="row" id = "search">
-                        <div class="form-group row" >
-                            <div class="col-md-2"></div>
-                            <div class="col-md-6">
-                            </div>
-                        </div>
                             <%--페이지 이동 , 전 페이지--%>
                         <div class="row" id="movepage">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-xs-3">
 
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 col-xs-6">
                                 <input type="submit" class="btn btn-warning" onclick="FirstMovePage(document.getElementById('page').value)" value="처음페이지"></input>
                                 <input type="submit" class="btn btn-info" onclick="loadPreviousPage(document.getElementById('page').value)" value="이전페이지"></input>
                                 <input type="submit" class="btn btn-danger" onclick="loadNextPage(document.getElementById('page').value,document.getElementById('pagemax').value)" value="다음페이지"></input>
                                 <input type="submit" class="btn btn-success" onclick="LastMovePage(document.getElementById('page').value,document.getElementById('pagemax').value)" value="마지막페이지"></input>
                                 <a class="btn btn-primary" href="<spring:url value="/write"/>">글 작성</a>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-5 col-xs-3">
 
                             </div>
                         </div>
-
-</div>
+                    </div>
     </div>
     </div>
 </body>

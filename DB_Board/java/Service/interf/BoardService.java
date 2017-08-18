@@ -18,12 +18,12 @@ public interface BoardService {
     //  댓글
     public void insertcommentVO(CommentVO commentVO);
     public List<CommentVO> selectcommentVO(int board_idx);
-    public void deletecommentVO(int comment_idx);
+    public void deletecommentVO(@Param("comment_idx") int comment_idx, @Param("comment_id") String comment_id);
     public void deleteallcommentVO(int board_idx);
 
 
 // 답글
-    public void deletereplycommentVO(int re_idx);
+    public void deletereplycommentVO(@Param("re_idx")int re_idx,@Param("re_com_id")String re_com_id);
     public void replyinsertcommentVO(ReplyVO replyVO);
     public List<ReplyVO> replyselectcommentVO(int re_board_idx);
     public void deletereplyallcommentVO(int re_board_idx);

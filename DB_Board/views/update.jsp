@@ -26,7 +26,7 @@
         </div>
             <%--제목 부분--%>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-2">
 
             </div>
             <div class="col-md-7" id="up_editor">
@@ -34,7 +34,7 @@
                 </h4>
 
             </div>
-            <div class="col-md-1">
+            <div class="col-md-3">
 
             </div>
         </div>
@@ -44,7 +44,7 @@
 
             </div>
             <div class="col-md-7" id="down_editor">
-                <form action="/updateboard" method="post">
+                <form action="/updateboard" method="post" accept-charset="UTF-8">
                     제목 <input type="text" id="title" name="title" maxlength="200" value="${title}"></input>
                     <textarea id="summernote" name="content">
                             ${Content}

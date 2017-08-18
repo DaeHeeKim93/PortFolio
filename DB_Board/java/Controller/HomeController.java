@@ -87,6 +87,7 @@ public class HomeController {
                        logger.info("로그인 되었습니다!.", locale);
                        request.getSession().setAttribute("ID",vo.getId());
                        request.getSession().setAttribute("Nickname",vo.getNickname());
+					   request.getSession().setAttribute("Security","Login");
                        return "home_login";
                    }
                 }

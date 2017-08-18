@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void deletecommentVO(int comment_idx){ boardMapper.deletecomment(comment_idx); };
+    public void deletecommentVO(@Param("comment_idx") int comment_idx, @Param("comment_id") String comment_id){ boardMapper.deletecomment(comment_idx,comment_id); };
 
     @Override
     public void deleteallcommentVO(int board_idx) {
@@ -66,7 +66,7 @@ public class BoardServiceImpl implements BoardService{
     public void replyinsertcommentVO(ReplyVO replyVO){ boardMapper.replyinsertcomment(replyVO);}
 
     @Override
-    public void deletereplycommentVO(int re_idx){ boardMapper.deletereplycomment(re_idx);};
+    public void deletereplycommentVO(@Param("re_idx")int re_idx,@Param("re_com_id")String re_com_id){boardMapper.deletereplycomment(re_idx,re_com_id);};
 
     @Override
     public void deletereplyallcommentVO(int re_board_idx){boardMapper.deletereplyallcomment(re_board_idx);}

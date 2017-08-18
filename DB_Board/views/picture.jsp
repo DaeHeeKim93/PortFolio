@@ -2,10 +2,10 @@
 <%@ page language="java" contentType="text/HTML;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/header/header.jsp" %>
 <%@ page session="false" %>
-<html>
+<html lang="en">
 <head>
     <title>Title</title>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content=""/>
@@ -15,8 +15,8 @@
     <link href="/resources/boostrap/boardtype/startbootstrap-blog-post-gh-pages/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/resources/boostrap/boardtype/startbootstrap-blog-post-gh-pages/css/blog-post.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="/resources/css/button.css"/>
-    <link rel="stylesheet" href="/resources/css/image.css"/>
+    <%--<link rel="stylesheet" href="/resources/css/button.css"/>--%>
+    <%--<link rel="stylesheet" href="/resources/css/image.css"/>--%>
     <script src="/resources/javascript/image.js"></script>
 
     <!-- jQuery -->

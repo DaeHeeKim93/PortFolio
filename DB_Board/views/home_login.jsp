@@ -37,9 +37,17 @@
         <![endif]-->
         <!-- jQuery -->
 
-        <title>Home</title>
+         <title>Home</title>
     </head>
     <body>
+        <script>
+            function go(){
+                var f = document.golink;
+                f.action="list.htm";
+                f.method="post";
+                f.submit();
+            }
+        </script>
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -98,7 +106,8 @@
             <div class="container-fluid">
                 <div class="row no-gutter popup-gallery">
                     <div class="col-lg-4 col-sm-6">
-                        <a href="<spring:url value="/list"/>" class="portfolio-box">
+                        <form name="golink">
+                        <a onclick="go()" class="portfolio-box">
                             <img src="/resources/boostrap/img/portfolio/thumbnails/1.jpg" class="img-responsive" alt=""/>
                             <div class="portfolio-box-caption">
                                 <div class="portfolio-box-caption-content">
@@ -111,36 +120,41 @@
                                 </div>
                             </div>
                         </a>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-                        <a href="/resources/boostrap/img/portfolio/fullsize/2.jpg" class="portfolio-box">
-                            <img src="/resources/boostrap/img/portfolio/thumbnails/2.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Image
+                        <form name="golink2">
+                            <a onclick="go()" class="portfolio-box">
+                                <img src="/resources/boostrap/img/portfolio/thumbnails/2.jpg" class="img-responsive" alt=""/>
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <div class="project-category text-faded">
+                                            Category
+                                        </div>
+                                        <div class="project-name">
+                                            Board
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-sm-6">
-                        <a href="/resources/boostrap/img/portfolio/fullsize/3.jpg" class="portfolio-box">
-                            <img src="/resources/boostrap/img/portfolio/thumbnails/3.jpg" class="img-responsive" alt="">
-                            <div class="portfolio-box-caption">
-                                <div class="portfolio-box-caption-content">
-                                    <div class="project-category text-faded">
-                                        Category
-                                    </div>
-                                    <div class="project-name">
-                                        Video
+                        <form name="golink3">
+                            <a onclick="go()" class="portfolio-box">
+                                <img src="/resources/boostrap/img/portfolio/thumbnails/3.jpg" class="img-responsive" alt=""/>
+                                <div class="portfolio-box-caption">
+                                    <div class="portfolio-box-caption-content">
+                                        <div class="project-category text-faded">
+                                            Category
+                                        </div>
+                                        <div class="project-name">
+                                            Board
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
+                            </a>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -220,6 +234,19 @@
             </div>
         </section>
 
+        <!-- jQuery -->
+        <script src="/resources/boostrap/vendor/jquery/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/resources/boostrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        <script src="/resources/boostrap/vendor/scrollreveal/scrollreveal.min.js"></script>
+        <script src="/resources/boostrap/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+        <!-- Theme JavaScript -->
+        <script src="/resources/boostrap/js/creative.min.js"></script>
 
     </body>
 </html>

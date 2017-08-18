@@ -41,7 +41,7 @@
                                 <td class="text-center" width="20%">${BoardVO.title}</td>
                                 <td class="text-center" width="30%">${BoardVO.board_nickname}</td>
                                 <td class="text-center" width="20%">${BoardVO.redegate}</td>
-                                <td class="text-center" width="10%">${BoardVO.count}</td>
+                                <td class="text-center" width="10%">${BoardVO.board_count}</td>
                                 <td class="text-center" witdh="10%"><input class= "white" type="button" onclick="location.href='/select.?idx=${BoardVO.idx}'" value="조회"></input></td>
                             </tr>
                         </c:forEach>
@@ -54,7 +54,7 @@
             </div>
 
             <div class="col-md-1"></div>
-            <div class="col-md-3">
+            <div id = "nickname_Div" class="col-md-3">
                 <div class="row"></div>
                     <%--로그인 정보 확인--%>
                 <div class="row">
