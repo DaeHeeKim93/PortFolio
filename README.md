@@ -10,7 +10,7 @@ http://teamimpact.azurewebsites.net/Home/Information/Daehee
 
 참여분야 : 전체 ( 기획, Front-End, Back-End (DataBase, Server) )
 
-세부링크 
+세부링크 : 
 http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=SpringBoard
 
 - JavaFxProject  
@@ -21,7 +21,7 @@ http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=SpringBo
 
 참여분야 : Server, UI Sub & Code Refactoring
 
-세부링크 
+세부링크 : 
 http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=JavaFx
 
 - DA설계공모전
@@ -32,7 +32,7 @@ http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=JavaFx
 
 참여분야 : 요구분석서, 데이터 요구 정의서, ERD 
 
-세부링크 
+세부링크 : 
 http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=DAProject
 
 - 개인사이트
