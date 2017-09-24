@@ -33,7 +33,7 @@ http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=JavaFx
 참여분야 : 요구분석서, 데이터 요구 정의서, ERD 
 
 세부링크 
-http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=JavaFx
+http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=DAProject
 
 - 개인사이트
 
