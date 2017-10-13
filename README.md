@@ -44,3 +44,16 @@ http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=DAProjec
 참여분야 : Main & Detail Page, Site 유지보수
 
 세부링크 : http://teamimpact.azurewebsites.net ( 운영중 )
+
+
+
+- NodejsProject
+
+참여기간 : 2017.10.03 ~
+
+참여주제 :  REST API & NODE.JS & MONGODB & Vue.js 이용한 MiddleWare 사이트
+
+참여분야 : 전체 ( 기획, Front-End, Back-End (DataBase, Server) )
+
+세부내용 : 현재 
+
