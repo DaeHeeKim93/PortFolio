@@ -1,13 +1,154 @@
 <!DOCTYPE html>
 <html>
-    <head>
-      <meta charset="UTF-8">
-    </head>
-    <body>
-      <form action="/topic" method="post">
-      <input type="text" name="title"/><p></p>
-      <textarea name="description"></textarea>
-      <input type="submit" value="제출"></input>
-    </form>  
-    </body>
+  <head>
+    <title>Node.JS Start Page</title>
+    <!-- Stylesheets -->
+
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+    
+    <!-- Jquery & Vue.js & axios & vue.js router-->
+    <script src="/javascripts/axios/dist/axios.js"></script>
+    <script src="/javascripts/jquery-3.2.1.js"></script>
+    <script src="/javascripts/vue.js"></script>
+   
+  </head>
+  <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-4" id="instance">
+              <!--instance 처리  -->
+              <!-- {{}}을 사용해서 vue 형식을 적용할 수 있습니다. -->
+              <p>{{ instance }}</p> 
+              <button type="button" class="btn btn-primary" v-on:click="instanceclick">인스턴스</button>
+            </div>
+            <div class="col-md-4" id ="component">
+              <!-- 전역 컴포넌트 처리 -->
+              <my-component></my-component>
+              <button type="button" class="btn btn-success">컴포넌트</button>
+            </div>
+            <div class="col-md-4" id="local">
+              <!-- 지역 컴포넌트 처리 -->
+                <local-component></local-component>
+                <button type="button" class="btn btn-warning" v-on:click.native="localcomponentclick">지역 컴포넌트</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <!-- 상.하위 컴포넌트 적용 -->
+          <div id="parent">
+            <child-component v-bind:childdata="outofchild"></child-component>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <!-- Vue.JS 기능 확인 버튼 -->
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" id="routerdiv">
+          <!-- router 처리 -->
+           <router-link to="/test1">Go to test1</router-link>
+           <router-link to="/test2">Go to test2</router-link>
+           <router-view></router-view>
+          </div>
+        <div class="col-md-4">
+
+        </div>
+      </div>
+    </div>
+    <script>
+    // Vue Life Cycle
+    var life = new Vue({
+      beforeCreate : function(){
+            console.log("Before");
+        },
+        created : function(){
+          console.log("Create");
+        },
+        mounted : function(){
+          console.log("mount");
+          // this.message = 1;
+        }, // 화면 갱신되는 과정에서 위의 세개 실행
+        updated : function(){
+          console.log("update");
+        }
+
+    });
+    </script>
+    <!-- Test function -->
+    <script>
+      // instance code
+      var url = "http://localhost:3000/get";
+      var instance = new Vue({
+        // template : "<p>안녕하세요!</p>",// 화면등에 나오는 요소 ( 정적 ) + Model Data 받아옴
+        el : "#instance",  // Vue element가 그려지는 요소
+        data:{
+          instance : ""
+        },
+        methods:{
+          instanceclick : function(){
+            axios.get(url) // axios를 이용한 get 요청 ( HTTP -Module )
+            .then(response => {
+              // JSON responses are automatically parsed.
+              this.instance = response.data.rows[0].idx; // JSON 형식으로 받아온 Data를 표시
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+          }
+        }
+      });
+    </script>
+
+    <script>
+    // component example code
+    Vue.component('my-component',{
+     template : '<p> 컴포넌트 예시입니다.</p>'
+     
+    }); 
+    new Vue({
+      el: '#component'
+    })
+    </script>
+    
+    <script>
+    // local component example code 
+    var localcmp = {
+        template : "<p>지역 컴포넌트</p>"
+    }
+
+      new Vue({
+        el: '#local' ,
+        components:{
+          'local-component' : localcmp
+        }
+      })
+    </script>
+    <script>
+      //상하위 component 적용
+      Vue.component('child-component',{
+        props: ['childdata'],
+        template : '<p>{{childdata}}</p>'
+      })
+      var app = new Vue({
+        el : '#parent',
+        data :{
+          outofchild : 'Hello , this Test Data ',
+        }
+      })
+    </script>
+     <script src="/javascripts/vue-router/dist/vue-router.js"></script>
+     <!-- Vue router 예시 js -->
+     <script src="/javascripts/router.js"></script>
+    <!-- <image src="/images/layout/weather.png" onclick = "location.href='/weather'"/> -->
+  </body>
 </html>
