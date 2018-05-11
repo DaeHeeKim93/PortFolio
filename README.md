@@ -1,4 +1,4 @@
-# PortFolio
+﻿# PortFolio
 # 지금까지 작성되었던 프로젝트가 올라오는 곳입니다.
 # 프로젝트 세부 내용 링크 
 http://teamimpact.azurewebsites.net/Home/Information/Daehee
@@ -56,4 +56,16 @@ http://teamimpact.azurewebsites.net/Home/Detail?name=Daehee&projectName=DAProjec
 참여분야 : 전체 ( 기획, Front-End, Back-End (DataBase, Server) )
 
 세부내용 : 현재 
+
+- Android Project 
+
+참여기간 : 2017.09.01 ~ 2017.10.31
+
+참여주제 : 스마트 서울시 문화가이드 
+
+참여분야 : 전체 ( 기획, Android (WebView) )
+
+세부내용 : https://github.com/MobileSeoul/2017seoul-92 ( 전체 소스 )
+
+
 
