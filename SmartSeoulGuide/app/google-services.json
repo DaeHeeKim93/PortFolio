@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "987968320593",
+    "firebase_url": "https://smartseoulguide.firebaseio.com",
+    "project_id": "smartseoulguide",
+    "storage_bucket": "smartseoulguide.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987968320593:android:ec716ed6a25ff143",
+        "android_client_info": {
+          "package_name": "me.blog.cjh7163.smartseoulguide"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987968320593-4jff40lpbbste99napcdnt98pq3c483q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.blog.cjh7163.smartseoulguide",
+            "certificate_hash": "17eafd868f955af9242e3c5ee7a97394449672b9"
+          }
+        },
+        {
+          "client_id": "987968320593-s82n0844arcf8g61vfsro38hsc7257od.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAq0YpsYOVLNMesHKXqpQQWOyE_bUjTMcg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987968320593-s82n0844arcf8g61vfsro38hsc7257od.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
