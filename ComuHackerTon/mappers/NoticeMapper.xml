@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 작성 ( 공지사항 게시판 ) xml 관리-->
+<mapper namespace="com.comu.hack.Mapper.NoticeMapper">
+	<!-- 글 페이징 카운팅 -->
+	<select id="noticeListCount" resultType="int">
+		SELECT count(*)
+		FROM Notice
+		where isDel = 0  and isSecret = 0  or member_idx = #{member_idx}
+	</select>
+
+	<!-- 글 한개 조회 -->
+	<select id="noticeDetailSelection"  resultType="com.comu.hack.VO.Notice">
+		SELECT *
+		FROM Notice
+		where notice_idx = #{report_idx} and isDel = 0
+	</select>
+
+	<!-- 글 리스트 조회 -->
+	<select id="noticeListSelection"  resultType="com.comu.hack.VO.Notice">
+		SELECT *
+		FROM Notice
+		where isDel = 0 and isSecret = 0  or (isDel = 0 and  member_idx = #{member_idx})
+		order by notice_date desc
+		LIMIT 10 OFFSET #{PrePage}
+	</select>
+
+</mapper>

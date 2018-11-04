@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 게시판 관리-->
+<mapper namespace="com.comu.hack.Mapper.AdminMapper">
+
+		<!-- 회원관리 시작 -->
+		<select id="adminMemberSelect" resultType="com.comu.hack.VO.Member">
+			select *
+			FROM member
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+
+		<select id="adminMemberSelectCount" resultType="int">
+			select count(*)
+			FROM member
+		</select>
+
+		<!-- 회원 상태 변경 -->
+		<update id="adminIsDelUpdate" parameterType="com.comu.hack.VO.Member">
+			UPDATE member set isDel =  #{isDel} where member_idx = #{member_idx}
+		</update>
+
+		<!-- 회원 기관 / 개인 변경 -->
+		<update id="adminStatusUpdate" parameterType="com.comu.hack.VO.Member">
+			UPDATE member set status = #{status} where member_idx = #{member_idx}
+		</update>
+
+		<!--공지사항 시작-->
+		<!-- 글 삽입 -->
+		<insert id="noticeInsert" parameterType="com.comu.hack.VO.Notice" >
+			INSERT INTO Notice(notice_title,notice_context,notice_date,notice_id,member_idx, isSecret)
+			VALUES(
+				#{notice_title},#{notice_context},NOW(),#{notice_id}, #{member_idx}, #{isSecret}
+			)
+		</insert>
+
+		<!-- 글 삭제 -->
+		<update id="noticeDelete" parameterType="int">
+			UPDATE Notice set isDel = 1 where notice_idx = #{notice_idx}
+		</update>
+
+		<!-- 글 수정 -->
+		<update id="noticeUpdate" parameterType="com.comu.hack.VO.Notice">
+			UPDATE Notice set notice_title = #{notice_title} , notice_context = #{notice_context} , isSecret =  #{isSecret} where notice_idx = #{notice_idx}
+		</update>
+
+		<!-- 글 페이징 카운팅 -->
+		<select id="noticeListCount" resultType="int">
+			SELECT count(*)
+			FROM Notice
+			where isDel = 0
+		</select>
+
+		<!-- 글 한개 조회 -->
+		<select id="noticeDetailSelection"  resultType="com.comu.hack.VO.Notice">
+			SELECT *
+			FROM Notice
+			where notice_idx = #{report_idx} and isDel = 0
+		</select>
+
+		<!-- 글 리스트 조회 -->
+		<select id="noticeListSelection"  resultType="com.comu.hack.VO.Notice">
+			SELECT *
+			FROM Notice
+			where isDel = 0
+			order by notice_date desc
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+		<!--공지사항 종료-->
+
+
+	   <!-- 신고 부분 시작 -->
+		<!-- 글 페이징 카운팅 -->
+		<select id="reportListCount" resultType="int">
+			SELECT count(*)
+			FROM Report
+			where isDel = 0
+		</select>
+
+		<!-- 글 한개 조회 -->
+		<select id="reportDetailSelection"  resultType="com.comu.hack.VO.Report">
+			SELECT *
+			FROM Report
+			where report_idx = #{report_idx} and isDel = 0
+		</select>
+
+
+		<!-- 글 리스트 조회 -->
+		<select id="reportListSelection"  resultType="com.comu.hack.VO.Report">
+			SELECT *
+			FROM Report
+			where isDel = 0
+			order by report_date desc
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+
+		<!-- 신고 해결 -->
+		<update id="adminreportUpdate" parameterType="com.comu.hack.VO.Report">
+			UPDATE Report set clear_id = #{clear_id} , solution_date = now() , report_status =  #{report_status} where report_idx = #{report_idx}
+		</update>
+
+	<!-- 신고 부분 종료 -->
+</mapper>

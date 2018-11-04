@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 작성 ( 신고게시판 ) xml 관리-->
+<mapper namespace="com.comu.hack.Mapper.ReportMapper">
+
+	<!-- 글 삽입 -->
+	<insert id="reportInsert" parameterType="com.comu.hack.VO.Report" >
+		INSERT INTO Report(report_division,report_en_divison,report_title,report_context,report_date,report_id,member_idx, isSecret)
+		VALUES(
+			#{report_division},#{report_en_divison},#{report_title},#{report_context},NOW(),#{report_id},#{member_idx}, #{isSecret}
+		)
+	</insert>
+
+	<!-- 글 삭제 -->
+	<update id="reportDelete" parameterType="int">
+		UPDATE Report set isDel = 1 where report_idx = #{report_idx}
+	</update>
+
+	<!-- 글 수정 -->
+    <update id="reportUpdate" parameterType="com.comu.hack.VO.Report">
+		UPDATE Report set report_title = #{report_title} , report_context = #{report_context} , isSecret =  #{isSecret} where report_idx = #{report_idx}
+	</update>
+
+	<!-- 글 페이징 카운팅 -->
+	<select id="reportListCount" resultType="int">
+		SELECT count(*)
+		FROM Report
+		where isDel = 0  and isSecret = 0  or member_idx = #{member_idx}
+	</select>
+
+	<!-- 글 한개 조회 -->
+	<select id="reportDetailSelection"  resultType="com.comu.hack.VO.Report">
+		SELECT *
+		FROM Report
+		where report_idx = #{report_idx} and isDel = 0
+	</select>
+
+
+	<!-- 글 리스트 조회 -->
+	<select id="reportListSelection"  resultType="com.comu.hack.VO.Report">
+		SELECT *
+		FROM Report
+		where isDel = 0  and isSecret = 0 or (isDel = 0 and  member_idx = #{member_idx})
+		order by report_date desc
+		LIMIT 10 OFFSET #{PrePage}
+	</select>
+
+
+
+
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 글 작성 ( 신고게시판 ) xml 관리-->
+<mapper namespace="com.comu.hack.Mapper.BoardMapper">
+
+	<!-- 글 삽입 -->
+	<insert id="boardInsert" parameterType="com.comu.hack.VO.Board" >
+		INSERT INTO Board(board_title,board_context,board_date,board_id,member_idx, isSecret)
+		VALUES(
+			#{board_title},#{board_context},NOW(),#{board_id}, #{member_idx}, #{isSecret}
+		)
+	</insert>
+
+	<!-- 글 삭제 -->
+	<update id="boardDelete" parameterType="int">
+		UPDATE Board set isDel = 1 where board_idx = #{board_idx}
+	</update>
+
+	<!-- 글 수정 -->
+    <update id="boardUpdate" parameterType="com.comu.hack.VO.Board">
+		UPDATE Board set  board_title = #{board_title} , board_context = #{board_context}  , isSecret =  #{isSecret} where board_idx = #{board_idx}
+	</update>
+
+	<!-- 글 페이징 카운팅 -->
+	<select id="boardListCount" resultType="int">
+		SELECT count(*)
+		FROM Board
+		where isDel = 0  and isSecret = 0 or member_idx = #{member_idx}
+	</select>
+
+	<!-- 글 한개 조회 -->
+	<select id="boardDetailSelection"  resultType="com.comu.hack.VO.Board">
+		SELECT *
+		FROM Board
+		where board_idx = #{board_idx} and isDel = 0
+	</select>
+
+
+	<!-- 글 리스트 조회 -->
+	<select id="boardListSelection"  resultType="com.comu.hack.VO.Board">
+		SELECT *
+		FROM Board
+		where isDel = 0  and isSecret = 0 or (isDel = 0 and  member_idx = #{member_idx})
+		order by board_date desc
+		LIMIT 10 OFFSET #{PrePage}
+	</select>
+
+	<!-- 댓글 입력 -->
+	<insert id="commentInsert" parameterType="com.comu.hack.VO.Comment" >
+		INSERT INTO Comment(comment_context,comment_date,comment_id,member_idx,board_id,board_idx)
+		VALUES(
+			#{comment_context},NOW(),#{comment_id}, #{member_idx}, #{board_id}, #{board_idx}
+		)
+	</insert>
+
+
+	<!-- 댓글 조회 -->
+	<select id="commentListSelection"  resultType="com.comu.hack.VO.Comment">
+		SELECT *
+		FROM Comment
+		where board_idx = #{board_idx} and isDel = 0
+		order by comment_date desc
+	</select>
+
+	<!-- 댓글 삭제 -->
+	<update id="commentDelete" parameterType="int">
+		UPDATE Comment set isDel = 1 where comment_idx = #{comment_idx}
+	</update>
+
+	<!-- 댓글 하나 부르기 -->
+	<select id="commentDetailSelect" resultType="com.comu.hack.VO.Comment" parameterType="int">
+		Select * from Comment where comment_idx = #{comment_idx}
+	</select>
+
+</mapper>

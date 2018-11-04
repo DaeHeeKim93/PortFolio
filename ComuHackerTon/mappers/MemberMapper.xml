@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 회원가입, 로그인 등  관리-->
+<mapper namespace="com.comu.hack.Mapper.MemberMapper">
+
+	<!-- 회원가입 -->
+	<insert id="insert_member" parameterType="com.comu.hack.VO.Member" >
+		INSERT INTO member(id, password, name, email,tel, emergency_tel, zipcode, status)
+		VALUES (
+			#{id},sha2(#{password}, 256), #{email}, #{name}, #{tel}, #{emergency_tel}, #{zipcode}, #{status}
+		)
+	</insert>
+
+	<!--  로그인 아이디, 비밀번호 체크  -->
+	<select id="check_member_password"  resultType="int">
+		SELECT COUNT(*)
+		FROM member
+		WHERE id = #{id} and password = sha2(#{password}, 256) and isDel = 0
+	</select>
+
+	<!--  세션에 담을 회원정보 가져오기  -->
+	<select id="create_session"  resultType="com.comu.hack.VO.MemberSession">
+		SELECT *
+		FROM member
+		WHERE id = #{id} and password = sha2(#{password}, 256) and isDel = 0
+	</select>
+
+	<!-- 중복 가입 여부 조사 -->
+
+	<select id="overlap_member" resultType="int">
+		  select count(*)
+		  from member
+		  where id=#{id}
+	</select>
+
+
+	<!-- 자유게시판 출력 -->
+	<select id="board_ListSelection" resultType="com.comu.hack.VO.Board">
+		( SELECT *
+		FROM Board
+		where isDel = 0 and isSecret = 0
+		order by board_idx desc  limit 3 )
+		UNION
+		( SELECT *
+		FROM Board
+		where isDel = 0 and member_idx = #{member_idx}
+		order by board_idx desc  limit 3 )
+
+	</select>
+
+
+	<!-- 신고내역 출력 -->
+	<select id="Report_ListSelection" resultType="com.comu.hack.VO.Report">
+		(SELECT *
+		FROM Report
+		where isDel = 0 and isSecret = 0
+		order by report_idx desc  limit 3)
+		UNION
+		( SELECT *
+		FROM Report
+		where isDel = 0 and member_idx = #{member_idx}
+		order by report_idx desc  limit 3 )
+	</select>
+
+	<!--  공지사항 출력-->
+	<select id="Notice_ListSelection" resultType="com.comu.hack.VO.Notice">
+		(SELECT *
+		FROM Notice
+		where isDel = 0 and isSecret = 0
+		order by notice_idx desc  limit 3)
+		UNION
+		( SELECT *
+		FROM Notice
+		where isDel = 0 and member_idx = #{member_idx}
+		order by notice_idx desc  limit 3 )
+	</select>
+
+	<!-- 회원탈퇴 -->
+	<update id="delete_member" parameterType="int">
+		UPDATE member set isDel = 1 where member_idx = #{member}
+	</update>
+
+</mapper>
