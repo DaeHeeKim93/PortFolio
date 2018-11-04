@@ -1,0 +1,215 @@
+﻿@model PortfolioWeb.ProfileInfo
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta property="og:title" content="Team Impact">
+
+    <meta property="og:image" content="/Resources/squadfree/img/bg1.jpg">
+    <meta property="og:description" content="Team Impact 프로젝트 페이지입니다.">
+    <title>포트폴리오 - @Model.NameKr</title>
+    <!-- Bootstrap core CSS -->
+    <link href="~/Resources/information/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="~/Resources/information/css/portfolio-item.css" rel="stylesheet">
+
+    <style>
+        .custom-header {
+            padding: 10px 50px;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+    @if (string.IsNullOrEmpty(Model.Id))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    존재하지 않는 사용자입니다.<br />
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">메인으로</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        <div class="bg-secondary custom-header">
+            <h1 class="text-white">ABOUT ME</h1>
+        </div>
+
+        <!-- Page Content -->
+        <div class="container">
+            <!-- Portfolio Item Row -->
+            <div class="row">
+                <div class="col-md-5">
+                    <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.ProfileImage) ? "http://placehold.it/400x400" : "data:image/jpeg;base64," + ViewBag.ProfileImage)" style="width: 400px; height:400px;">
+                </div>
+                <div class="col-md-7">
+                    <h3 class="text-dark"><strong>@Model.Job</strong></h3>
+                    <p>
+                        <h4 class="text-dark">@Model.NameKr</h4>
+                        <span class="text-secondary" style="font-size: 16px;">@Model.NameEn</span>
+                    </p>
+                    Email: <a href="mailto://@Model.Email">@Model.Email</a>
+                    <hr />
+
+                    <!-- 학력 및 이력사항 -->
+                    <ul class="list-unstyled">
+                        <li>@Model.UniversityInfo.Name @Model.UniversityInfo.Major @Model.UniversityInfo.GraduationDate</li>
+                        @foreach (var acheive in Model.Achievements)
+        {
+                <li>@acheive</li>
+
+}
+                    </ul>
+                    <!-- 직장 경력-->
+                    <hr />
+                    <ul class="list-unstyled">
+                        <li><strong>경력</strong></li>
+                        @foreach (var job in Model.Jobs)
+    {
+                    <li>@job</li>
+
+}
+                    </ul>
+                    <!--  수상 경력 -->
+                    <hr />
+                    <ul class="list-unstyled">
+                        <li><strong>수상</strong></li>
+                        @foreach (var award in Model.Awards)
+    {
+                    <li>@award</li>
+
+}
+                    </ul>
+                    <!-- 할 말 -->
+                    <hr />
+                    @Model.Comment
+                    <hr />
+
+                    <!-- 기타 활동 ( 주석처리 )-->
+
+                    @foreach (var activity in Model.Activities)
+    {
+                <!-- <div class="row">
+    <div class="col-md-2">
+        <strong>@activity.Name</strong>
+    </div>
+    <div class="col-md-2">
+        <a class="col-md-2" href="@activity.Url">@activity.Id</a>
+
+    </div>
+</div>
+-->
+
+
+}
+
+                    <!-- Github , Linkedin Image 형태로 변경-->
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="@Model.GithubLink">
+                                <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.GithubImage) ? "http://placehold.it/400x400" : "data:image/jpeg;base64," + ViewBag.GithubImage)" style="width: 58px; height:58px;">
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="@Model.LinkedinLink">
+                                <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.LinkedinImage) ? "http://placehold.it/400x400" : "data:image/jpeg;base64," + ViewBag.LinkedinImage)" style="width: 65px; height:54px;">
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+
+        <div style="height: 100px;"></div>
+
+        <div class="bg-secondary custom-header">
+            <h1 class="text-white">PROJECT</h1>
+        </div>
+
+        <!-- 프로젝트 표시 영역 -->
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-3 col-sm-12">
+                <div class="list-group" id="list-tab" role="tablist" style="margin-bottom: 12px;">
+                    @{
+                        bool isFirstListItem = true;
+                    }
+
+                    @foreach (var item in Model.Projects)
+                    {
+                        <a class="list-group-item list-group-item-action @(isFirstListItem ? "active" : "")" id="list-@item.DirName-list" data-toggle="list" href="#list-@item.DirName" role="tab" aria-controls="@item.DirName">@item.Name</a>
+                        isFirstListItem = false;
+                    }
+                </div>
+            </div>
+            <br />
+            <div class="col-md-9 col-sm-12">
+                <div class="tab-content" id="nav-tabContent">
+                    @{
+                        isFirstListItem = true;
+                    }
+
+                    @foreach (var item in Model.Projects)
+                    {
+                        <div class="tab-pane fade @(isFirstListItem ? "show active" : "")" id="list-@item.DirName" role="tabpanel" aria-labelledby="list-@item.DirName-list">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-12 text-center">
+                                    <img src="@(string.IsNullOrEmpty(item.Thumbnail) ? "http://placehold.it/200x200" : "data:image/jpeg;base64," + item.Thumbnail)" class="img-responsive rounded" style="width: 200px; height: 200px;" />
+                                </div>
+                                <div class="col-md-offset-4 col-md-8 col-sm-12">
+                                    <p>
+                                        <h3 class="text-dark">@item.Name</h3>
+                                        <span class="text-secondary" style="font-size: 16px;">@item.Topic</span> <br />
+                                    </p>
+                                    <hr />
+                                    <p>
+                                        @item.Comment
+                                    </p>
+                                    <a class="btn btn-primary float-right" href="@Url.Action("Detail", "Home", new { name = ViewBag.ID, projectName = item.DirName })">VIEW DETAIL</a>
+                                </div>
+                            </div>
+                        </div>
+                        isFirstListItem = false;
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 100px;"></div>
+
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">&copy; Copyright 2017 - Team impact</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+
+        <!-- 플로팅 버튼 -->
+                        <a class="btn btn-secondary" href="@Url.Action("Index", "Home")" tabindex="-1" style="position: fixed; right: 20px; bottom: 20px; width: 100px; height: 40px;">Home</a>
+                        <a class="btn btn-secondary" href="#" tabindex="-1" style="position: fixed; right: 20px; bottom: 80px; width: 100px; height: 40px;">Top</a>
+
+                        }
+
+    <!-- /.container -->
+    <!-- Footer -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="~/Resources/information/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Resources/information/vendor/popper/popper.min.js"></script>
+    <script src="~/Resources/information/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('.collapse').collapse();
+        });
+    </script>
+</body>
+</html>
+

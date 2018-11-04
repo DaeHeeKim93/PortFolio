@@ -1,0 +1,91 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta property="og:title" content="Team Impact">
+    <meta property="og:description" content="Team Impact 인물 페이지입니다.">
+    <meta property="og:image" content="/Resources/squadfree/img/bg1.jpg">
+    <title>프로젝트 페이지</title>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <link rel="stylesheet" href="~/Resources/Silder/responsiveslides.css">
+    <link rel="stylesheet" href="~/Resources/Silder/demo/demo.css">
+    <link rel="stylesheet" href="~/Scripts/bootstrap.js">
+    <link rel="stylesheet" href="~/Resources/Navigation/css/style.css">
+    <script src="~/Resources/Silder/responsiveslides.min.js"></script>
+
+    <script>
+        // You can also use "$(window).load(function() {"
+        $(function () {
+            // Slideshow 4
+            $("#slider4").responsiveSlides({
+                auto: false,
+                pager: false,
+                nav: true,
+                speed: 500,
+                namespace: "callbacks",
+                before: function () {
+                },
+                after: function () {
+                }
+            });
+
+        });
+    </script>
+</head>
+<body style="background-color:#222">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <ul class="menu cf"  >
+                    <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li> <a href="@Url.Action("Information", "Home", new { id = "Daehee" })">DaeHee</a></li>               
+                </ul>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="callbacks_container">
+                    <ul class="rslides" id="slider4" box-shadow:"10px 10px 5px #fff">
+                        @for (int i = 0; i < ViewBag.Picture; i++)
+                        {
+
+                            int pre = (i - 1) % ViewBag.Picture;
+                            if (pre == -1) { pre = ViewBag.Picture - 1; }
+                            int next = (i + 1) % ViewBag.Picture;
+
+                            string listsilder = "no-js-slider" + i;
+                            string route = ViewBag.Route + "/" + i + ".jpg";
+                            string nextroute = "#no-js-slider" + next;
+                            string preroute = "#no-js-slider" + pre;
+                            byte[] bytes = File.ReadAllBytes(route);
+                            string convert = Convert.ToBase64String(bytes);
+                            <li id="@listsilder" class="slide">
+                                <img src="data:image/jpg;base64,@convert" />
+                                <a class="prev" href="@preroute"></a>
+                                <a class="next" href="@nextroute"></a>
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

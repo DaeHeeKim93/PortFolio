@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta property="og:title" content="Team Impact">
+    <meta property="og:image" content="~/Resources/squadfree/img/bg1.jpg">
+    <meta property="og:description" content="Team Impact 메인 페이지입니다.">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Team Impact Main Page</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Resources/squadfree/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Fonts -->
+    <link href="~/Resources/squadfree/css/animate.css" rel="stylesheet" />
+    <!-- Squad theme CSS -->
+    <link href="~/Resources/squadfree/css/style.css" rel="stylesheet">
+    <link href="~/Resources/squadfree/color/default.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="load"></div>
+    </div>
+
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <h1>TEAM IMPACT</h1>
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#intro">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#service">Service</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team Member Site<b class="caret"></b></a>
+                        <ul class="dropdown-menu">                          
+                            <li><a href="@Url.Action("Information", "Home", new { id = "Daehee" })">Daehee</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Section: intro -->
+    <section id="intro" class="intro">
+
+        <div class="slogan">
+            <h2>WELCOME TO <span class="text_color">TEAM IMPACT STUDIO</span> </h2>
+            <h4>Developers who dream of making a better life</h4>
+        </div>
+
+    </section>
+    <!-- /Section: intro -->
+    <!-- Section: about -->
+    <section id="about" class="home-section text-center">
+        <div class="heading-about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="wow bounceInDown" data-wow-delay="0.4s">
+                            <div class="section-heading">
+                                <h2>About us</h2>
+                                <i class="fa fa-2x fa-angle-down"></i>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <hr class="marginbot-50">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="wow bounceInUp" data-wow-delay="0.5s">
+                        <div class="team boxed-grey">
+                            <div class="inner">
+                                <h5>김대희</h5>
+                                <div class="avatar">
+                                    <a href="@Url.Action("Information", "Home", new { id = "Daehee" })" alt="" class="img-responsive img-circle">
+                                        <img src="~/Resources/squadfree/img/team/Daehee.jpg" alt="" class="img-responsive img-circle" />
+                                    </a>
+                                    <p class="subtitle">Web Programmer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                 
+                </div>
+
+            </div>
+        </div>    
+    </section>
+    <!-- /Section: about -->
+    <!-- Section: services -->
+    <section id="service" class="home-section text-center bg-gray">
+
+        <div class="heading-about">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="wow bounceInDown" data-wow-delay="0.4s">
+                            <div class="section-heading">
+                                <h2>Our Services</h2>
+                                <i class="fa fa-2x fa-angle-down"></i>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <hr class="marginbot-50">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInLeft" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <img src="~/Resources/squadfree/img/icons/service-icon-1.png" alt="" />
+                            </div>
+                            <div class="service-desc">
+                                <h5>DataBase</h5>
+                                <p>MYSQL, MSSQL, MARIADB 등 상용 DBMS들을 다룰수 있으며, DA#, ERWIN 등을 통해 ERD설계 또한 가능합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <img src="~/Resources/squadfree/img/icons/service-icon-2.png" alt="" />
+                            </div>
+                            <div class="service-desc">
+                                <h5>Server</h5>
+                                <p>Ubnutu 서버, Azure 등의 클라우드 서버를 다루고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInUp" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <img src="~/Resources/squadfree/img/icons/service-icon-3.png" alt="" />
+                            </div>
+                            <div class="service-desc">
+                                <h5>Android</h5>
+                                <p>Native Android 및 Webview를 이용한 Android App 또한 다루고 있습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="wow fadeInRight" data-wow-delay="0.2s">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <img src="~/Resources/squadfree/img/icons/service-icon-4.png" alt="" />
+                            </div>
+                            <div class="service-desc">
+                                <h5>Web BackEnd</h5>
+                                <p>Spring Framework, ASP.NET, Node.js 등의 Back-End 또한 다루고 있습니다</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Section: services -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <div class="wow shake" data-wow-delay="0.4s">               
+                    </div>
+                    <p>&copy; Copyright 2017 - Team impact.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="~/Resources/squadfree/js/jquery.min.js"></script>
+    <script src="~/Resources/squadfree/js/bootstrap.min.js"></script>
+    <script src="~/Resources/squadfree/js/jquery.easing.min.js"></script>
+    <script src="~/Resources/squadfree/js/jquery.scrollTo.js"></script>
+    <script src="~/Resources/squadfree/js/wow.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Resources/squadfree/js/custom.js"></script>
+
+</body>
+
+</html>
