@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 단어 작성 ( 단어 ) xml 관리-->
+<mapper namespace="com.project.ifhackerton.Mapper.WordMapper">
+
+	<!-- 단어 삽입 -->
+	<insert id="wordInsert" parameterType="com.project.ifhackerton.VO.Word" >
+		INSERT INTO Word(north_word,south_word,word_date,word_id,member_idx)
+		VALUES(
+			#{north_word},#{south_word},NOW(),#{word_id}, #{member_idx}
+		)
+	</insert>
+
+	<!-- 북한말 -> 남한말 조회 카운트 -->
+	<select id="northSearchWordCount"  resultType="int">
+		select count(*)
+		from word
+		where north_word like CONCAT('%',#{north_textarea},'%') and isSecret = 0 and isDel = 0
+	</select>
+
+	<!-- 북한말 -> 남한말 조회 -->
+	<select id="northSearchWord"  resultType="com.project.ifhackerton.VO.Word">
+		select *
+		from word
+		where north_word like CONCAT('%',#{north_textarea},'%') and isSecret = 0 and isDel = 0
+	</select>
+
+	<!-- 남한말 -> 북한말 조회 카운트 -->
+	<select id="southSearchWordCount"  resultType="int">
+		select count(*)
+		from word
+		where south_word like CONCAT('%',#{south_textarea},'%') and isSecret = 0 and isDel = 0
+	</select>
+
+	<!-- 남한말 -> 북한말 조회 -->
+	<select id="southSearchWord"  resultType="com.project.ifhackerton.VO.Word">
+		select *
+		from word
+		where south_word like CONCAT('%',#{south_textarea},'%') and isSecret = 0 and isDel = 0
+	</select>
+
+	<!-- 검색 조건 -->
+	<insert id="SearchInsert" parameterType="com.project.ifhackerton.VO.Word_Search" >
+		INSERT INTO word_search(word_idx,member_idx,search_date,search_ip)
+		VALUES(
+			#{word_idx},#{member_idx},NOW(),#{search_ip}
+		)
+	</insert>
+
+
+</mapper>

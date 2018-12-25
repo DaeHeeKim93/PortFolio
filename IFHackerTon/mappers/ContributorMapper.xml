@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 기여자 xml 관리-->
+<mapper namespace="com.project.ifhackerton.Mapper.ContributorMapper">
+
+	<!-- 기여자 페이징 카운팅 -->
+	<select id="ContributorListCount" resultType="int">
+		select count(distinct member_idx)
+		from Word
+	</select>
+
+	<!-- 기여자 리스트 조회 -->
+	<select id="contributeListSelection"  resultType="com.project.ifhackerton.VO.Contributor">
+		select  word_id as contributor_id, count(word_idx) as contributor_count
+		from Word
+		where isDel = 0 and isSecret = 0
+		group by  word_id
+		order by word_idx desc
+		LIMIT 10 OFFSET #{PrePage}
+	</select>
+
+
+	<!-- 기여자 페이징 카운팅 -->
+	<select id="Contributor_ListCount" resultType="int">
+		select count(distinct member_idx)
+		from Word
+	</select>
+
+	<!-- 기여자 리스트 조회 -->
+	<select id="contribute_ListSelection"  resultType="com.project.ifhackerton.VO.Contributor">
+		select  word_id as contributor_id, count(word_idx) as contributor_count
+		from Word
+		where isDel = 0 and isSecret = 0
+		group by  word_id
+		order by word_idx desc
+		LIMIT 10 OFFSET #{PrePage}
+	</select>
+
+</mapper>

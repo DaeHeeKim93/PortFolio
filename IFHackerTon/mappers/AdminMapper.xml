@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 게시판 관리-->
+<mapper namespace="com.project.ifhackerton.Mapper.AdminMapper">
+
+		<!-- 회원관리 시작 -->
+		<select id="adminMemberSelect" resultType="com.project.ifhackerton.VO.Member">
+			select *
+			FROM member
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+
+		<select id="adminMemberSelectCount" resultType="int">
+			select count(*)
+			FROM member
+		</select>
+
+		<!-- 회원 상태 변경 -->
+		<update id="adminIsDelUpdate" parameterType="com.project.ifhackerton.VO.Member">
+			UPDATE member set isDel =  #{isDel} where member_idx = #{member_idx}
+		</update>
+
+		<!-- 회원 기관 / 개인 변경 -->
+		<update id="adminStatusUpdate" parameterType="com.project.ifhackerton.VO.Member">
+			UPDATE member set status = #{status} where member_idx = #{member_idx}
+		</update>
+
+		<!--공지사항 시작-->
+		<!-- 글 삽입 -->
+		<insert id="noticeInsert" parameterType="com.project.ifhackerton.VO.Notice" >
+			INSERT INTO Notice(notice_title,notice_context,notice_date,notice_id,member_idx, isSecret)
+			VALUES(
+				#{notice_title},#{notice_context},NOW(),#{notice_id}, #{member_idx}, #{isSecret}
+			)
+		</insert>
+
+		<!-- 글 삭제 -->
+		<update id="noticeDelete" parameterType="int">
+			UPDATE Notice set isDel = 1 where notice_idx = #{notice_idx}
+		</update>
+
+		<!-- 글 수정 -->
+		<update id="noticeUpdate" parameterType="com.project.ifhackerton.VO.Notice">
+			UPDATE Notice set notice_title = #{notice_title} , notice_context = #{notice_context} , isSecret =  #{isSecret} where notice_idx = #{notice_idx}
+		</update>
+
+		<!-- 글 페이징 카운팅 -->
+		<select id="noticeListCount" resultType="int">
+			SELECT count(*)
+			FROM Notice
+			where isDel = 0
+		</select>
+
+		<!-- 글 한개 조회 -->
+		<select id="noticeDetailSelection"  resultType="com.project.ifhackerton.VO.Notice">
+			SELECT *
+			FROM Notice
+			where notice_idx = #{report_idx} and isDel = 0
+		</select>
+
+		<!-- 글 리스트 조회 -->
+		<select id="noticeListSelection"  resultType="com.project.ifhackerton.VO.Notice">
+			SELECT *
+			FROM Notice
+			where isDel = 0
+			order by notice_date desc
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+		<!--공지사항 종료-->
+
+
+		<!-- 단어 부분 시작 -->
+		<!-- 글 페이징 카운팅 -->
+		<select id="wordListCount" resultType="int">
+				SELECT count(*)
+				FROM Word
+				where isDel = 0
+			</select>
+
+		<!-- 글 한개 조회 -->
+		<select id="wordDetailSelection"  resultType="com.project.ifhackerton.VO.Word">
+				SELECT *
+				FROM Word
+				where word_idx = #{word_idx} and isDel = 0
+			</select>
+
+
+		<!-- 글 리스트 조회 -->
+		<select id="wordListSelection"  resultType="com.project.ifhackerton.VO.Word">
+				SELECT *
+				FROM Word
+				where isDel = 0
+				order by word_idx desc
+				LIMIT 10 OFFSET #{PrePage}
+			</select>
+
+		<!-- 단어 공개 -->
+		<update id="adminwordUpdate" parameterType="com.project.ifhackerton.VO.Word">
+				UPDATE Word set isSecret =  #{isSecret} where word_idx = #{word_idx}
+		</update>
+
+		<!-- 단어 부분 종료 -->
+
+		<!-- 기여자 부분 시작 -->
+		<!-- 기여자 페이징 카운팅 -->
+		<select id="ContributorListCount" resultType="int">
+			select count(distinct member_idx)
+			from Word
+		</select>
+
+		<!-- 기여자 리스트 조회 -->
+		<select id="contributeListSelection"  resultType="com.project.ifhackerton.VO.Contributor">
+			select  word_id as contributor_id, count(word_idx) as contributor_count
+			from Word
+			where isDel = 0 and isSecret = 0
+			group by  word_id
+			order by word_idx desc
+			LIMIT 10 OFFSET #{PrePage}
+		</select>
+		<!-- 기여자 부분 종료 -->
+
+		<!-- 날짜 부분 출력 -->
+		<select id="statistics_Login" resultType="int">
+			select count(memberlogidx) from memberloginlog  group by DATE_FORMAT(logindate , '%Y-%m-%d') order by loginDate desc limit 7
+		</select>
+
+		<!-- 메시지 출력 -->
+		<select id="statistics_Message" resultType="java.lang.String">
+			select north_word  from word_search  inner join word on word.word_idx = word_search.word_idx group by word_search.word_idx, word.north_word order by count(word_search.word_idx) desc limit 4
+		</select>
+		<select id="statistics_Message_Count" resultType="int">
+			select  count(word_search.word_idx) from word_search  inner join word on word.word_idx = word_search.word_idx group by word_search.word_idx, word.north_word order by count(word_search.word_idx) desc limit 4
+		</select>
+</mapper>
