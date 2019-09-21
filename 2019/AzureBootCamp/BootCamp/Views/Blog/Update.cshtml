@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+
+    <!-- 블로그 글 수정 화면-->
+    <meta property="og:title" content="Update Blog">
+  
+    <!-- SummerNOTE CDN -->
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote.js"></script>
+
+   
+    <!-- Form Update -->
+    <script type="text/javascript">
+        function FormUpdate() {
+            const blog = {
+                BlogId : "@Model.BlogId",
+                Title: $("#BlogTitle").val(),
+                Context: $('#summernote').summernote('code'),
+                Regdate: new Date(),
+                ThumbNail: $("#ThumbNail").val()
+            };
+            $.ajax({
+                type: "POST",
+                accepts: "application/json",
+                url: '/Blog/BlogUpdate',
+                contentType: "application/json",
+                data: JSON.stringify(blog),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Something went wrong!");
+                },
+                success: function (result) {
+                    alert("블로그 글이 수정되었습니다.");
+                    location.href = "@Url.Action("Index", "Blog")";
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BootCamp</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> <!-- Home/Index -->
+                    <li><a asp-area="" asp-controller="Home" asp-action="Information" asp-route-id="BootCamp">Information</a></li> <!-- Home/Informaion/BootCamp URL Call-->
+                    <li><a asp-area="" asp-controller="Blog" asp-action="Index">Blog</a></li> <!-- Blog/Index -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h3>제목</h3>&nbsp;&nbsp;<br />
+                <input id="BlogTitle" name="BlogTitle" size="50"value="@Model.Title"/>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10"><textarea id="summernote">@Model.Context</textarea></div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10"><h3>ThumbNail</h3>&nbsp;&nbsp;<input id="ThumbNail" name="ThumbNail" size="20" value="@Model.ThumbNail" /></div>
+            <div class="col-md-1"></div>
+        </div>
+        <br />
+        <div style="height: 100px;">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-3">
+                    <a class="btn btn-secondary" href="@Url.Action("Index", "Blog")" width: 100px; height: 40px;">Blog Home</a>&nbsp;&nbsp;
+                    <a class="btn btn-danger" href="javascript:FormUpdate();" width: 100px; height: 40px;">Update</a>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">&copy;Copy Right 2019. Kim Dae Hee.</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+    </div>
+
+
+
+    <script>
+        $(function () {
+            $('.collapse').collapse();
+        });
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 1000
+            });
+        });
+    </script>
+
+
+</body>
+</html>

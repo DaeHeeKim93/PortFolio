@@ -1,0 +1,69 @@
+﻿<!-- XML 파싱 화면 -->
+@{
+    ViewData["Title"] = "Information";
+}
+
+@if (string.IsNullOrEmpty(Model.Id))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                존재하지 않는 사용자입니다.<br />
+                <a class="btn btn-primary" href="@Url.Action("Index", "Home")">메인으로</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class="bg-secondary custom-header">
+        <h1 class="text-white">ABOUT Detail</h1>
+    </div>
+
+    <!-- Page Content -->
+    <div class="container">
+        <!-- Portfolio Item Row -->
+        <div class="row">
+            <div class="col-md-5">
+                <!-- 절대 경로에서 상대 경로로 뜨도록 변경-->
+                @{ string profileURL = ViewBag.ProfileImage; }
+                <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.ProfileImage) ? "http://placehold.it/400x400" : profileURL)" style="width: 400px; height:400px;">
+            </div>
+            <div class="col-md-7">
+                <p>
+                    <h4 class="text-dark">@Model.NameKr</h4>
+                    <span class="text-secondary" style="font-size: 16px;">@Model.NameEn</span>
+                </p>
+                Email: <a href="mailto://@Model.Email">@Model.Email</a>
+                <!-- 할 말 -->
+                <hr />
+                @Model.Comment
+                <hr />
+
+                <!-- Github , Linkedin Image 형태로 변경-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="@Model.FestaLink">
+                            <!-- 절대 경로에서 상대 경로로 뜨도록 변경-->
+                            @{ string FestaImageURL = Context.Request.Scheme + "://" + Context.Request.Host + ViewBag.FestaImage; }
+                            <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.FestaImage) ? "http://placehold.it/100x100" : FestaImageURL)" style="width: 158px; height:108px;">
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="@Model.AzureBootCampLink">
+                            <!-- 절대 경로에서 상대 경로로 뜨도록 변경-->
+                            @{ string AzureBootCampImageURL = Context.Request.Scheme + "://" + Context.Request.Host + ViewBag.AzureBootCampImage; }
+                            <img class="img-fluid rounded" src="@(string.IsNullOrEmpty(ViewBag.AzureBootCampImage) ? "http://placehold.it/100x100" : AzureBootCampImageURL)" style="width: 108px; height:108px;">
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+
+    <div style="height: 100px;"></div>
+
+}

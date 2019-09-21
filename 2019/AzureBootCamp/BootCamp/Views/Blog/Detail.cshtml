@@ -1,0 +1,135 @@
+﻿@{
+    Layout = null;
+
+}
+<html lang="en">
+<head>
+
+
+    <!-- SummerNOTE CDN -->
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+
+    <!-- 블로그 글 상세 화면-->
+    <meta property="og:title" content="Detail Blog">
+    <script>
+        function deleteFunction() {
+
+            const blog = {
+                BlogId: "@Model.BlogId"
+            };
+
+            $.ajax({
+                type: "POST",
+                accepts: "application/json",
+                url: '/Blog/BlogDelete',
+                contentType: "application/json",
+                data: JSON.stringify(blog),
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Something went wrong!");
+                },
+                success: function (result) {
+                    alert("블로그 글이 삭제되었습니다.");
+                    location.href = "@Url.Action("Index", "Blog")";
+                }
+            });
+
+        }
+    </script>
+
+</head>
+<body>
+    @if (Model == null)
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BootCamp</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> <!-- Home/Index -->
+                        <li><a asp-area="" asp-controller="Home" asp-action="Information" asp-route-id="BootCamp">Information</a></li> <!-- Home/Informaion/BootCamp URL Call-->
+                        <li><a asp-area="" asp-controller="Blog" asp-action="Index">Blog</a></li> <!-- Blog/Index -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    해당 블로그 글은 존재하지 않습니다.<br />
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Home")">메인으로</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">BootCamp</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> <!-- Home/Index -->
+                        <li><a asp-area="" asp-controller="Home" asp-action="Information" asp-route-id="BootCamp">Information</a></li> <!-- Home/Informaion/BootCamp URL Call-->
+                        <li><a asp-area="" asp-controller="Blog" asp-action="Index">Blog</a></li> <!-- Blog/Index -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr/>
+        <hr/>
+
+        <!-- 제목 출력-->
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <h2>@Model.Title</h2>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+        <!-- DB에 저장된 내용을 HTML로 출력 -->
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                @Html.Raw(@Model.Context)
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+
+
+        <!-- Delete / Update Button -->
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <a class="btn btn-secondary" href="javascript:deleteFunction();" width: 100px; height: 40px;">Delete</a>
+                <a class="btn btn-secondary" href="@Url.Action("Update", "Blog", new { blogId = Model.BlogId })" width: 100px; height: 40px;">Update</a>
+            </div>
+            <div class="col-md-5"></div>
+        </div>
+
+
+    }
+
+
+</body>
+</html>

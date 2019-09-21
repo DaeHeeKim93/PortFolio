@@ -1,0 +1,48 @@
+﻿<!-- 블로그 글 리스트 화면 -->
+@if (Model == null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                해당 블로그 글은 존재하지 않습니다.<br />
+                <a class="btn btn-primary" href="@Url.Action("Index", "Home")">메인으로</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Blog 표시 영역 -->
+    @foreach (var blog in Model)
+    {
+        <div class="row" style="margin: 20px;">
+            <div class="col-md-4 col-sm-4 text-center">
+
+                <img src="@blog.ThumbNail" class="img-responsive rounded" style="width: 200px; height: 200px;" />
+            </div>
+            <div class="col-md-8 col-8">
+                <p>
+                    <h3 class="text-dark">@blog.Title</h3>
+                </p>
+                <hr />
+                <p>
+                    @blog.Regdate
+                </p>
+                <a class="btn btn-primary float-right" href="@Url.Action("Detail", "Blog" , new { blogId = blog.BlogId })">VIEW DETAIL</a>
+            </div>
+        </div>
+    }
+    <div style="height: 200px;">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <a class="btn btn-primary" href="@Url.Action("Index", "Blog" , new { page = ViewBag.PrePage })" width: 100px; height: 40px;">Prev</a>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Blog" , new { page = ViewBag.NextPage })" width: 100px; height: 40px;">Next</a>
+                <a class="btn btn-danger" href="@Url.Action("Insert", "Blog")" width: 100px; height: 40px;">Insert</a>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+
+}
