@@ -3,6 +3,7 @@
 
 ![](ProjectContents.png)
 - 프로젝트 설명 링크 : https://daeheekim.azurewebsites.net/
+- 모든 프로젝트의 PDF는 allPDF Directory에서 확인 가능합니다.
 
 ## 2019 
 - AzureBootCamp ( Azure BootCamp 2019 )
@@ -11,6 +12,9 @@
 - 기만콘 ( 기만콘 2019 )
   - 주제 : 백엔드 개발자가 허우적대는 리액트 이야기
   - 링크 : http://www.fairbrite.com/DevStarLeague/events/12  
+-  웰컴투 메이커톤 2019 ( 미래상 )
+    - 주제 : 미세먼지에 따른 관광지 추천 앱
+    - Spring, Java, Kakao Map API, 공공 API
   
 ## 2018
 - IFHackerTon
